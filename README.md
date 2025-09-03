@@ -60,8 +60,10 @@ CREATE TABLE books
     status VARCHAR(20),
     author VARCHAR(55),
     publisher VARCHAR(55));
+```
 
--- Foreign Keys
+### Foreign Keys
+```sql
 ALTER TABLE issued_status
 ADD CONSTRAINT fk_books FOREIGN KEY (issued_book_isbn) REFERENCES books(isbn);
 
@@ -76,8 +78,11 @@ ADD CONSTRAINT fk_branch FOREIGN KEY (branch_id) REFERENCES branch(branch_id);
 
 ALTER TABLE return_status
 ADD CONSTRAINT fk_issued_status FOREIGN KEY (issued_id) REFERENCES issued_status(issued_id);
+```
 
--- Sample data insert: Members
+### SAMPLE DATA INSERT
+```sql
+Sample data insert: Members
 INSERT INTO members(member_id, member_name, member_address, reg_date)
 VALUES
 	('C101','Alice Johnson','123 Main St','2021-05-15'),
