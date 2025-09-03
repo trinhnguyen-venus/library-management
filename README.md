@@ -1,40 +1,61 @@
-\# Library Management Project (SQL)
+# 📚 Library Management Project (SQL)
+
+This project simulates a **Library Management System** using SQL Server.  
+It covers database setup, CRUD operations, reporting queries, and insights.
+
+---
+
+## 1) Database Setup
+
+```sql
+-- Create database (optional)
+-- CREATE DATABASE library_db;
+-- USE library_db;
+
+-- Table: branch
+DROP TABLE IF EXISTS branch;
+CREATE TABLE branch (
+  branch_id   VARCHAR(10) PRIMARY KEY,
+  manager_id  VARCHAR(10),
+  branch_address VARCHAR(30),
+  contact_no  VARCHAR(15));
+
+-- Table: employees
+DROP TABLE IF EXISTS employees;
+CREATE TABLE employees (
+  emp_id    VARCHAR(10) PRIMARY KEY,
+  emp_name  VARCHAR(30),
+  position  VARCHAR(30),
+  salary    DECIMAL(10,2),
+  branch_id VARCHAR(10),
+  FOREIGN KEY (branch_id) REFERENCES branch(branch_id));
+
+## 2) CRUD Operations
+
+- **Create**: Inserted sample records into the `books` table.  
+- **Read**: Retrieved and displayed data from various tables.  
+- **Update**: Updated records in the `employees` table.  
+- **Delete**: Removed records from the `members` table as needed.
+
+### Task 1 – Create a New Book Record
+```sql
+INSERT INTO books(isbn, book_title, category, rental_price, status, author, publisher)
+VALUES ('978-1-60129-456-2','To Kill a Mockingbird','Classic', 6.00,'yes','Harper Lee','J.B. Lippincott & Co.');
+
+SELECT * FROM books;
+
+### Task 2 – Update an Existing Member's Address
+```sql
+UPDATE members
+SET member_address = '125 Oak St'
+WHERE member_id = 'C103';
+
+### Task 3 – Delete a Record from the Issued Status Table
+DELETE FROM issued_status
+WHERE issued_id = 'IS121';
 
 
 
-\## Introduction
-
-This project simulates a \*\*Library Management System\*\* using SQL.  
-
-It covers database schema design, data population, and practical SQL queries for day-to-day operations and reporting.
-
-
-
-\##  Schema
-
-\- \*\*Books\*\*: isbn, title, category, price, status, author, publisher  
-
-\- \*\*Members\*\*: member details and registration date  
-
-\- \*\*Employees\*\*: library staff and branch assignments  
-
-\- \*\*Branch\*\*: branch info with manager reference  
-
-\- \*\*Issued\_Status\*\*: records of issued books  
-
-\- \*\*Return\_Status\*\*: records of returned books  
-
-
-
-\## Key Tasks
-
-\- Insert / Update / Delete operations (CRUD).  
-
-\- JOIN queries to connect members, employees, and issued books.  
-
-\- Aggregations: top 3 issued books, overdue books, and rental income by category.  
-
-\- CTAS examples: branch performance report, book issue counts.  
 
 
 
