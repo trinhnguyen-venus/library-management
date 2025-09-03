@@ -159,25 +159,25 @@ VALUES
 ```sql
 INSERT INTO books(isbn, book_title, category, rental_price, status, author, publisher)
 VALUES 
-	('978-1-60129-456-2', 'To Kill a Mockingbird', 'Classic', '6.00', 'yes', 'Harper Lee', 'J.B. Lippincott & Co.');```
+	('978-1-60129-456-2', 'To Kill a Mockingbird', 'Classic', '6.00', 'yes', 'Harper Lee', 'J.B. Lippincott & Co.');
 
 SELECT * FROM books;
-
+```
 ### Task 2: Update an Existing Member's Address
 ```sql
 UPDATE members
 SET member_address = '125 Main St'
 WHERE member_id = 'C101';
 SELECT * FROM members;
-
-### Task 3: Delete a Record from the Issued Status Table```
+```
+### Task 3: Delete a Record from the Issued Status Table
 ```sql
 DELETE FROM issued_status
 WHERE issued_id = 'IS121';
 
 SELECT * FROM issued_status
-WHERE issued_id = 'IS121';```
-
+WHERE issued_id = 'IS121';
+```
 ### Task 4: Retrieve all books issued by the employee with emp_id = 'E104'
 ```sql
 SELECT emp_name, 
@@ -186,8 +186,8 @@ SELECT emp_name,
 	issued_date
 FROM issued_status
 	JOIN employees ON emp_id = issued_emp_id
-WHERE issued_emp_id = 'E104';```
-
+WHERE issued_emp_id = 'E104';
+```
 ### Task 5: List members who have issued more than one book
 ```sql
 SELECT issued_member_id,
@@ -196,8 +196,8 @@ SELECT issued_member_id,
 FROM issued_status
 	JOIN members ON member_id = issued_member_id
 GROUP BY issued_member_id, member_name
-HAVING COUNT(*) >=2;```
-
+HAVING COUNT(*) >=2;
+```
 ### Task 6: Create a summary table (CTAS) showing each book and its total issued count
 ```sql
 SELECT isbn,
@@ -208,13 +208,13 @@ FROM books
 	JOIN issued_status ON isbn = issued_book_isbn
 GROUP BY isbn, book_title;
 
-SELECT * FROM book_issued_cnt;```
-
+SELECT * FROM book_issued_cnt;
+```
 ### Task 7: Retrieve all books in the 'Classic' category
 ```sql
 SELECT * FROM books
-WHERE category = 'Classic';```
-
+WHERE category = 'Classic';
+```
 ### Task 8: Find total rental income by category
 ```sql
 SELECT b.category,
@@ -222,7 +222,8 @@ SELECT b.category,
        SUM(b.rental_price) AS total_rental_income
 FROM books b
 	JOIN issued_status ist ON b.isbn = ist.issued_book_isbn
-GROUP BY b.category;```
+GROUP BY b.category;
+```
 
 ### Task 9: List members who registered in the last 180 days
 ```sql
@@ -232,7 +233,8 @@ WHERE reg_date >= DATEADD(DAY, -180, GETDATE());
 INSERT INTO members(member_id, member_name, member_address, reg_date)
 VALUES 
 	('C325', 'Sam', '145 Main St', '2025-07-01'),
-	('C216', 'John', '222 Marie St', '2025-08-25');```
+	('C216', 'John', '222 Marie St', '2025-08-25');
+```
 
 ### Task 10: List employees with their manager's name and branch details
 ```sql
@@ -243,7 +245,8 @@ SELECT E1.emp_name,
 	branch.*
 FROM employees E1
 	JOIN branch ON E1.branch_id = branch.branch_id
-	JOIN employees E2 ON E2.emp_id = branch.manager_id;```
+	JOIN employees E2 ON E2.emp_id = branch.manager_id;
+```
 
 ### Task 11: Create a new table containing books with rental_price greater than 7 USD
 ```sql
@@ -252,14 +255,16 @@ INTO books_price_greater_than_7
 FROM books
 WHERE rental_price > 7;
 
-SELECT * FROM books_price_greater_than_7;```
+SELECT * FROM books_price_greater_than_7;
+```
 
 ### Task 12: Retrieve the list of books that have not been returned
 ```sql
 SELECT DISTINCT issued_book_name
 FROM issued_status ist
 	LEFT JOIN return_status rst ON ist.issued_id = rst.issued_id
-WHERE rst.return_id IS NULL;```
+WHERE rst.return_id IS NULL;
+```
 
 ### Task 13: Find overdue books (>30 days)
 ```sql
@@ -268,7 +273,8 @@ SELECT ist.issued_id, ist.issued_book_name, m.member_name,
 FROM issued_status ist
 	JOIN members m ON m.member_id = ist.issued_member_id
 	JOIN return_status rst ON rst.issued_id = ist.issued_id
-WHERE DATEDIFF(DAY, ist.issued_date, rst.return_date) > 30;```
+WHERE DATEDIFF(DAY, ist.issued_date, rst.return_date) > 30;
+```
 
 ### Task 14: Update book status on return
 ```sql
@@ -276,7 +282,8 @@ UPDATE b
 SET b.status = 'yes'
 FROM books b
 	JOIN issued_status ist ON ist.issued_book_isbn = b.isbn
-	JOIN return_status rst ON rst.issued_id = ist.issued_id;```
+	JOIN return_status rst ON rst.issued_id = ist.issued_id;
+```
 
 ### Task 15: Branch performance report
 ```sql
@@ -290,7 +297,8 @@ FROM employees e
 	JOIN issued_status ist ON ist.issued_emp_id = e.emp_id
 	JOIN books b ON b.isbn = ist.issued_book_isbn
 	LEFT JOIN return_status rst ON rst.issued_id = ist.issued_id
-GROUP BY br.branch_id;```
+GROUP BY br.branch_id;
+```
 
 SELECT * FROM branch_reports;
 
@@ -300,7 +308,8 @@ SELECT TOP 3 ist.issued_book_name,
 	COUNT(*) AS issued_count
 FROM issued_status ist
 GROUP BY ist.issued_book_name
-ORDER BY issued_count DESC;```
+ORDER BY issued_count DESC;
+```
 
 ---
 
