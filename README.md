@@ -48,7 +48,7 @@ It covers database schema design, data population, and practical SQL queries for
 
 
 
-\## 📊 Example Insights
+\## Example Insights
 
 \- “Harry Potter” and “The Da Vinci Code” are among the most issued books.  
 
