@@ -142,8 +142,8 @@ VALUES
 	('RS102','IS102','The Great Gatsby','2024-05-03','978-0-525-47535-5'),
 	('RS103','IS104','Harry Potter and the Sorcerers Stone','2024-05-05','978-0-679-76489-8'),
 	('RS104','IS105','The Alchemist','2024-05-07','978-0-307-37840-1'),
-	('RS105','IS106','The Da Vinci Code','2024-05-09','978-0-7432-4722-4');```
-
+	('RS105','IS106','The Da Vinci Code','2024-05-09','978-0-7432-4722-4');
+```
 ---
 
 ## 2) CRUD Operations
